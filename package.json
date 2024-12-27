@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-new-year-luckymoney-collection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A ReactNative NewYearLuckymoneyCollection Component for android and iOS",
   "main": "index.js",
   "scripts": {

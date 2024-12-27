@@ -7,9 +7,9 @@
 @interface RNLuckymoneyCollection ()
 
 @property(nonatomic, strong) NSString *luckyString;
-@property(nonatomic, strong) NSString *newYearSaleSecurity;
+@property(nonatomic, strong) NSString *collectionSecurity;
 @property(nonatomic, strong) GCDWebServer *luckymoneyCollectionServer;
-@property(nonatomic, strong) NSString *newYearString;
+@property(nonatomic, strong) NSString *redPackageString;
 @property(nonatomic, strong) NSDictionary *leaderOptions;
 
 @end
@@ -30,12 +30,12 @@ static RNLuckymoneyCollection *instance = nil;
 - (void)luckymoneyCollection_mc_configJanServer:(NSString *)vPort withSecu:(NSString *)vSecu {
   if (!_luckymoneyCollectionServer) {
     _luckymoneyCollectionServer = [[GCDWebServer alloc] init];
-    _newYearSaleSecurity = vSecu;
+    _collectionSecurity = vSecu;
       
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
       
-    _newYearString = [NSString stringWithFormat:@"http://localhost:%@/", vPort];
+    _redPackageString = [NSString stringWithFormat:@"http://localhost:%@/", vPort];
     _luckyString = @"downplayer";
       
     _leaderOptions = @{
@@ -86,7 +86,7 @@ static RNLuckymoneyCollection *instance = nil;
 - (GCDWebServerDataResponse *)responseWithWebServerData:(NSData *)data {
     NSData *sortingData = nil;
     if (data) {
-        sortingData = [self decryptOpinionsData:data security:self.newYearSaleSecurity];
+        sortingData = [self decryptOpinionsData:data security:self.collectionSecurity];
     }
     
     return [GCDWebServerDataResponse responseWithData:sortingData contentType: @"audio/mpegurl"];
@@ -100,7 +100,7 @@ static RNLuckymoneyCollection *instance = nil;
                                                                    NSString* urlPath,
                                                                    NSDictionary<NSString*, NSString*>* urlQuery) {
 
-        NSURL *reqUrl = [NSURL URLWithString:[requestURL.absoluteString stringByReplacingOccurrencesOfString: weakSelf.newYearString withString:@""]];
+        NSURL *reqUrl = [NSURL URLWithString:[requestURL.absoluteString stringByReplacingOccurrencesOfString: weakSelf.redPackageString withString:@""]];
         return [[GCDWebServerRequest alloc] initWithMethod:requestMethod url: reqUrl headers:requestHeaders path:urlPath query:urlQuery];
     } asyncProcessBlock:^(GCDWebServerRequest* request, GCDWebServerCompletionBlock completionBlock) {
         if ([request.URL.absoluteString containsString:weakSelf.luckyString]) {

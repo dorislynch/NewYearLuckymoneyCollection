@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNNewYearLuckymoneyCollection"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "RNNewYearLuckymoneyCollection"
   s.description  = <<-DESC
                   RNNewYearLuckymoneyCollection
